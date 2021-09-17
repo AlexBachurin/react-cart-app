@@ -17,7 +17,7 @@ const CartItem = ({ item }) => {
                 <button className="amount-btn">
                     <AiOutlineArrowUp />
                 </button>
-                <p className="amount">1</p>
+                <p className="amount">{amount}</p>
                 <button className="amount-btn">
                     <AiOutlineArrowDown />
                 </button>
