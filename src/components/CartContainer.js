@@ -1,6 +1,8 @@
 import React from 'react'
-
+import { useGlobalContext } from '../context'
+import CartItem from './CartItem';
 const CartContainer = () => {
+    const { cart } = useGlobalContext();
     return (
         <section className="cart">
             <header>
@@ -8,6 +10,9 @@ const CartContainer = () => {
             </header>
             <div>
                 {/* here we dynamically display items from data */}
+                {cart.map((item, index) => {
+                    return <CartItem key={index} item={item} />
+                })}
             </div>
             <footer>
                 <hr />
@@ -15,6 +20,7 @@ const CartContainer = () => {
                     <h4>total</h4>
                     <p>$2000</p>
                 </div>
+                <button className="btn clear-btn">clear cart</button>
             </footer>
         </section>
     )
