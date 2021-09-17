@@ -1,9 +1,12 @@
 import React, { useContext, useReducer, useEffect } from "react";
 import data from './data';
-import reducer from './reducer'
+import reducer from './reducer';
+const url = 'https://course-api.com/react-useReducer-cart-project';
+
 const AppContext = React.createContext();
 
 const initialState = {
+    loading: false,
     cart: data,
     amount: 0,
     total: 0
@@ -11,7 +14,19 @@ const initialState = {
 
 const AppProvider = ({ children }) => {
     //reducer
-    const [state, dispatch] = useReducer(reducer, initialState)
+    const [state, dispatch] = useReducer(reducer, initialState);
+    //fetch data
+    const getData = async () => {
+        dispatch({ type: 'LOADING' })
+        const res = await fetch(url);
+        const data = await res.json();
+        dispatch({ type: 'DISPLAY_ITEMS', payload: data });
+    }
+
+
+    useEffect(() => {
+        getData();
+    }, [])
     //clear ALL cart
     const clearCart = () => {
         dispatch({ type: 'CLEAR_CART' });
@@ -34,6 +49,7 @@ const AppProvider = ({ children }) => {
         dispatch({ type: 'TOTALS' })
 
     }, [state.cart])
+
 
 
 
