@@ -15,10 +15,15 @@ const AppProvider = ({ children }) => {
     const clearCart = () => {
         dispatch({ type: 'CLEAR_CART' });
     }
+
+    const clearSingleItem = (id) => {
+        dispatch({ type: 'CLEAR_SINGLE_ITEM', payload: id })
+    }
     return <AppContext.Provider value={
         {
             ...state,
-            clearCart
+            clearCart,
+            clearSingleItem
         }
     }>
         {children}

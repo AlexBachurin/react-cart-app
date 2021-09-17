@@ -1,7 +1,9 @@
 import React from 'react'
-import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'
+import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
+import { useGlobalContext } from '../context';
 const CartItem = ({ item }) => {
     const { id, title, price, img, amount } = item;
+    const { clearSingleItem } = useGlobalContext();
     return (
         <article className="cart-item">
             <img src={img} alt={title} />
@@ -11,7 +13,7 @@ const CartItem = ({ item }) => {
                     $
                     {price}
                 </h4>
-                <button className="remove-btn">remove</button>
+                <button onClick={() => clearSingleItem(id)} className="remove-btn">remove</button>
             </div>
             <div>
                 <button className="amount-btn">
