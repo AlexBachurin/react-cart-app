@@ -3,7 +3,7 @@ import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
 import { useGlobalContext } from '../context';
 const CartItem = ({ item }) => {
     const { id, title, price, img, amount } = item;
-    const { clearSingleItem } = useGlobalContext();
+    const { clearSingleItem, increaseAmount, decreaseAmount } = useGlobalContext();
     return (
         <article className="cart-item">
             <img src={img} alt={title} />
@@ -16,11 +16,11 @@ const CartItem = ({ item }) => {
                 <button onClick={() => clearSingleItem(id)} className="remove-btn">remove</button>
             </div>
             <div>
-                <button className="amount-btn">
+                <button onClick={() => increaseAmount(id)} className="amount-btn">
                     <AiOutlineArrowUp />
                 </button>
                 <p className="amount">{amount}</p>
-                <button className="amount-btn">
+                <button onClick={() => decreaseAmount(id)} className="amount-btn">
                     <AiOutlineArrowDown />
                 </button>
             </div>

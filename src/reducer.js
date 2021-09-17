@@ -7,6 +7,28 @@ const reducer = (state, action) => {
             const id = action.payload;
             const clearedArr = state.cart.filter(item => item.id !== id);
             return { ...state, cart: clearedArr }
+        case 'INCREASE':
+            let itemId = action.payload;
+            let tempArr = state.cart.map(item => {
+                if (item.id === itemId) {
+                    return { ...item, amount: item.amount + 1 }
+                }
+                return item;
+            })
+            return { ...state, cart: tempArr }
+        case 'DECREASE':
+            const tempID = action.payload;
+            let tempArr2 = state.cart.map(item => {
+                if (item.id === tempID) {
+                    return { ...item, amount: item.amount - 1 }
+                }
+                return item;
+            })
+                //filter to show elements which dont have amount of 0
+                .filter(item => {
+                    return item.amount !== 0;
+                })
+            return { ...state, cart: tempArr2 }
         default:
             throw new Error('No such action type');
 
