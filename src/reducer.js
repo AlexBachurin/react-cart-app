@@ -29,6 +29,25 @@ const reducer = (state, action) => {
                     return item.amount !== 0;
                 })
             return { ...state, cart: tempArr2 }
+        case 'TOTALS':
+            //functionality to get total and amount
+            let { total, amount } = state.cart.reduce(
+                (cartTotal, cartItem) => {
+                    const { price, amount } = cartItem
+                    const itemTotal = price * amount
+
+                    cartTotal.total += itemTotal
+                    cartTotal.amount += amount
+                    return cartTotal
+                },
+                {
+                    total: 0,
+                    amount: 0,
+                }
+            )
+            total = parseFloat(total.toFixed(2))
+
+            return { ...state, total, amount }
         default:
             throw new Error('No such action type');
 

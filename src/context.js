@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from "react";
+import React, { useContext, useReducer, useEffect } from "react";
 import data from './data';
 import reducer from './reducer'
 const AppContext = React.createContext();
@@ -6,6 +6,7 @@ const AppContext = React.createContext();
 const initialState = {
     cart: data,
     amount: 0,
+    total: 0
 }
 
 const AppProvider = ({ children }) => {
@@ -27,6 +28,15 @@ const AppProvider = ({ children }) => {
     const decreaseAmount = (id) => {
         dispatch({ type: 'DECREASE', payload: id });
     }
+
+    //use effect to calculate totals on every cart state change
+    useEffect(() => {
+        dispatch({ type: 'TOTALS' })
+
+    }, [state.cart])
+
+
+
     return <AppContext.Provider value={
         {
             ...state,

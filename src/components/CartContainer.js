@@ -3,7 +3,7 @@ import { useGlobalContext } from '../context'
 import CartItem from './CartItem';
 import Placeholder from './Placeholder';
 const CartContainer = () => {
-    const { cart, clearCart } = useGlobalContext();
+    const { cart, clearCart, total } = useGlobalContext();
     //check cart length if its empty show placeholder text
     if (cart.length === 0) {
         return (
@@ -25,7 +25,7 @@ const CartContainer = () => {
                 <hr />
                 <div className="cart-total">
                     <h4>total</h4>
-                    <p>$2000</p>
+                    <p>${total}</p>
                 </div>
                 <button onClick={clearCart} className="btn clear-btn">clear cart</button>
             </footer>
